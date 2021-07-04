@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/styles.css">
+    <link rel="sortcut icon" href="images/icon.png">
+    <title>GeradorDeSenhas</title>
+</head>
+
+<body>
+    <header class="cabecario">
+        <img src="images/topo.png" alt="">
+
+    </header>
+    <div class="container">
+        <main>
+            <div id="campo">
+                <label for="pswLeght">Tamanho da Senha:</label><br>
+                <input id="pswLeght" type="number" min="1"><br>
+                <label for="pswQtd">Quantidade de Senhas:</label><br>
+                <input id="pswQtd" type="number" min="1"><br>
+
+            </div>
+            <div id="check">
+                <label><input id="special" type="checkbox"> Incluir Caracteres Especiais</label>
+                <label><input id="number" type="checkbox"> Incluir Números</label>
+                <label><input id="upperCase" type="checkbox"> Incluir Letras Maiusculas</label>
+            </div>
+            <button id="click" onclick="pswGenerate()"> Gerar Senha </button>
+            <button id="click" onclick="clean()">Limpar Senhas</button>
+
+            <div id="resultado">
+                <label for="answer">Resultado:</label>
+            </div>
+
+            <textarea id="answer" rows="6"> Senhas... </textarea>
+
+            <script>
+                function pswGenerate() {
+                    let characters = 'abcdefghijklmnopqrstuvwxyz'
+                    let password = ' '
+                    let leght = document.getElementById('pswLeght').value
+                    let qtd = document.getElementById('pswQtd').value
+                    let spc = document.getElementById('special').checked
+                    let numb = document.getElementById('number').checked
+                    let upp = document.getElementById('upperCase').checked
+
+                    if (spc == true) { characters += '@#$%&*()[]/|' }
+                    if (numb == true) { characters += '1234567890' }
+                    if (upp == true) { characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' }
+
+                    let charactersLength = characters.length
+
+                    for (let y = 1; y <= qtd; y++) {
+
+                        let passwordN = ''
+
+                        for (let x = 1; x <= leght; x++) {
+                            passwordN = passwordN + characters.charAt(Math.floor(Math.random() * charactersLength))
+                        }
+                        password = passwordN + '  ' + password
+                    }
+
+                    document.getElementById('answer').value = password
+
+                }
+                function clean() {
+                    document.getElementById('answer').value = ' '
+                }
+            </script>
+        </main>
+        
+    </div>
+    <footer>
+        <em>Elaborado por Patricia S. Rainha 2021</em>
+    </footer>
+</body>
+</html>
